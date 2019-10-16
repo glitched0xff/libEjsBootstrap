@@ -1,0 +1,18 @@
+<%# { classX: , label:, name:,id:,val:, row:, cols:,maxlength:,disabled:1,required:1,readonly:1  }%>
+<div class="<%= classX %>">
+    <div class="form-group">
+      <% if (locals.label) {%>
+          <label for="<%= name %>"><%= label %></label>
+      <% } %>
+      <textarea class="form-control"
+          name="<%= name %>"
+          id="<%= id %>"
+          <% if (typeof rows!='undefined') {%> rows="<%= rows %>"  <% } %>
+          <% if (locals.cols) {%> cols="<%= cols %>" <% } %>
+          <% if (locals.maxlength) {%> maxlength="<%= maxlength %>" <% } %>
+          <% if (locals.disabled) {%> disabled <% } %>
+          <% if (locals.required) {%> required <% } %>
+          <% if (locals.readonly) {%> readonly <% } %>
+      ><%= val %></textarea>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="<%= classX %>">
+  <div class="form-group">
+    <% if (locals.label) {%>
+    <label for="<% name %>"><%= label%></label>
+    <% } %>
+    <input class="form-control" type="<%= type %>" name="<%= name %>" value="<%= value %>" id="<%= id %>">
+    <% if (locals.help) {%>
+      <p class="help-block small"><%= help %></p>
+      <% }%>
+  </div>
+</div>

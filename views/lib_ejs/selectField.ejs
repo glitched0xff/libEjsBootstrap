@@ -1,0 +1,15 @@
+<div class="<%= classX %>">
+  <div class="form-group">
+    <label for="exampleFormControlSelect2"><%= label%></label>
+    <select multiple class="form-control" name="<%= name %>" id="<%= id %>" >
+      <option><%= firstField%></option>
+      <% option.forEach(elem => { %>
+        <option val="<% elem.val%>"><% elem.txt%></option>
+      <% }); %>
+  </select>
+    <% if (help) {%>
+      <p class="help-block small"><%= help %></p>
+      <% }%>
+  </div>
+
+</div>
