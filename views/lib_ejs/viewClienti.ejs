@@ -1,0 +1,183 @@
+<% include partials/head %>
+<% include partials/sidebar %>
+<div id="content-wrapper" class="d-flex flex-column">
+  <!-- Main Content -->
+  <div id="content">
+    <% include partials/topnavbar%>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // apro una modal
+        $('#modificaBtn').click(function() {
+          $('#modModal').modal('show')
+        })
+        $('#cancellaBtn').click(function() {
+          $('#delModal').modal('show')
+        })
+        $('#aggiungiProgettiBtn').click(function(){
+          $('#newModalProgetti').modal('show')
+        })
+      });
+    </script>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><%= daticliente[0].cliente %></h1>
+      </div>
+
+      <!-- Area anagrafica -->
+      <div class="card shadow mb-2">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Anagrafica</h6>
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+              <div class="dropdown-header">Opzioni:</div>
+              <a class="dropdown-item" id="modificaBtn" href="#">Modifica dati cliente</a>
+              <a class="dropdown-item" id="cancellaBtn" href="#">Cancella cliente</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row  p-2">
+            <div class="col-6">
+              <b>Nome:</b>
+              <%= daticliente[0].cliente%>
+            </div>
+            <div class="col-6 ">
+              <b>Codice cliente:</b>
+              <%= daticliente[0].cliente_sn%>
+            </div>
+          </div>
+          <hr>
+          <div class="row  p-2">
+            <div class="col-4 ">
+              <b>Telefono:</b>
+              <%= daticliente[0].tel%>
+            </div>
+            <div class="col-4 ">
+              <b>Indirizzo mail:</b>
+              <a href="mailto:<%= daticliente[0].mail%>"><%= daticliente[0].mail%></a>
+            </div>
+            <div class="col-4 ">
+              <b>Riferimento:</b>
+              <%= daticliente[0].riferimento%>
+            </div>
+          </div>
+          <div class="row  p-2">
+            <div class="col-4">
+              <b>Partita iva:</b>
+              <%= daticliente[0].piva%>
+            </div>
+            <div class="col-4">
+              <b>Codice fiscale:</b>
+              <%= daticliente[0].cf%>
+            </div>
+            <div class="col-4">
+              <b>Ragione sociale:</b>
+              <%= daticliente[0].rag_soc%>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-6">
+              <b>Descrizione:</b>
+              <textarea name="name" class="form-control" disabled><%= daticliente[0].descrizione%></textarea>
+
+            </div>
+            <div class="col-6">
+              <b>Note:</b>
+              <textarea name="name" class="form-control" disabled><%= daticliente[0].note%></textarea>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Area progetti -->
+      <div class="card shadow mb-2">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Progetti</h6>
+            <a href="#">
+              <button type="button" class="btn btn-sm btn-primary" id="aggiungiProgettiBtn">
+                  <i class="fas fa-plus fa-sm ">  </i> Aggiungi progetto
+              </button>
+            </a>
+        </div>
+        <div class="card-body">
+          <% if (progetti.length>0) { %>
+                <table id="rapportini" class="table w-100 table-hover">
+                  <thead>
+                    <tr>
+                      <th>Progetto</th>
+                      <th>Tipo</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% progetti.forEach(elem => { %>
+                    <tr>
+                      <td><%= elem.progetto %></td>
+                      <td><%= elem.tipo %></td>
+                      <td>In corso</td>
+                      <td> <a href="#"><button type="button" class="btn btn-sm btn-primary" name="button"><i class="fas fa-sm fa-eye"></i></button></a></td>
+                    </tr>
+                    <%  }); %>
+                  </tbody>
+                </table>
+
+          <% } else { %>
+            <div class="alert alert-danger"> Non sono presenti progetti</div>
+            <%} %>
+        </div>
+      </div>
+
+      <!-- Area rapportini -->
+      <div class="card shadow mb-2">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Rapportini</h6>
+            <a href="#">
+              <button type="button" class="btn btn-sm btn-primary" name="button">
+                  <i class="fas fa-plus fa-sm ">  </i> Aggiungi rapportino
+              </button>
+            </a>
+        </div>
+        <div class="card-body">
+          <% if (rapportini.length>0) { %>
+              <div class="table-fluid">
+                <table id="rapportini">
+                  <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Numero</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% rapportini.forEach(elem => { %>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td> <a href="#"><button type="button" class="btn btn-sm btn-primary" name="button"></button></a></td>
+                    </tr>
+                    <%  }); %>
+                  </tbody>
+                </table>
+              </div>
+
+          <% } else { %>
+            <div class="alert alert-danger"> Non sono presenti rapportini</div>
+            <%} %>
+        </div>
+      </div>
+
+</div>
+</div>
+<!-- End of Main Content -->
+<%- include('clienti_partials/modDel_clienti') %>
+<%- include('progetti_partials/insert_progetti',{preselectCliente: daticliente[0].cliente, preselectId:daticliente[0].id }) %>
+<% include partials/foot %>
