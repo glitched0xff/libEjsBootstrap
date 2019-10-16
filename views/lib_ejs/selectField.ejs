@@ -1,13 +1,22 @@
 <div class="<%= classX %>">
   <div class="form-group">
     <label for="exampleFormControlSelect2"><%= label%></label>
-    <select multiple class="form-control" name="<%= name %>" id="<%= id %>" >
+    <select class="form-control"
+            name="<%= name %>"
+            id="<%= id %>"
+            <% if (locals.size) {%> size="<% size %>" <% } %>
+            <% if (locals.disabled) {%> disabled <% } %>
+            <% if (locals.required) {%> required <% } %>
+            <% if (locals.multiple) {%> multiple <% } %>
+            >
       <option><%= firstField%></option>
-      <% option.forEach(elem => { %>
-        <option val="<% elem.val%>"><% elem.txt%></option>
-      <% }); %>
+      <% if (locals.option){ %>
+
+      <% locals.option.forEach(elem => { %>
+        <option val="<%= elem.val%>"><%= elem.txt%></option>
+      <% }); }%>
   </select>
-    <% if (help) {%>
+    <% if (locals.help) {%>
       <p class="help-block small"><%= help %></p>
       <% }%>
   </div>
